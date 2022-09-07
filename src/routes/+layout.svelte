@@ -1,58 +1,33 @@
 <script>
-	import Header from '$lib/header/Header.svelte';
-  import { webVitals } from '$lib/vitals';
-  import { browser } from '$app/env';
-  import { page } from '$app/stores';
-  import '../app.css';
 
-  let analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
-
-  $: if (browser && analyticsId) {
-    webVitals({
-      path: $page.url.pathname,
-      params: $page.params,
-      analyticsId
-    })
-  }
 </script>
 
-<Header />
+<div class="nav">
+        <div on:click={() => {window.location.href = ("/")}}>Home</div>
+        <div on:click={() => {window.location.href = ("/calc")}}>Calc</div>
+</div>
 
-<main>
-	<slot />
-</main>
-
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+<slot></slot>
 
 <style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
+    .nav {
+        margin-top: -7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        width: 100vw;
+    }
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
+    .nav > div {
+        cursor: pointer;
+        padding: 2rem 0;
+        flex-grow: 1;
+        text-align: center;
+    }
 
-	footer a {
-		font-weight: bold;
-	}
+    .nav > div:hover {
+        background-color: #eee;
 
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
+    }
 </style>
