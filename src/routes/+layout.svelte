@@ -5,6 +5,8 @@
 <div class="nav">
         <div on:click={() => {window.location.href = ("/")}}>Home</div>
         <div on:click={() => {window.location.href = ("/calc")}}>Calc</div>
+        <div on:click={() => {window.location.href = ("/vat")}}>Vat</div>
+        <div on:click={() => {window.location.href = ("/temp")}}>Temp</div>
 </div>
 
 <slot></slot>

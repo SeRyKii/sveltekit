@@ -27,7 +27,10 @@
                 <div class="apps">
                     <!-- calculator logo -->
                     <div data-url="/calc" class="calc"><img src="https://img.icons8.com/ios/50/000000/calculator.png" alt="calculator" /></div>
-                    
+                    <!-- vat calculator with percent as logo -->
+                    <div data-url="/vat" class="calc"><img src="https://img.icons8.com/percentage" alt="vat" /></div>
+                    <!-- temperature calculator with termometer logo -->
+                    <div data-url="/temp" class="calc"><img src="https://img.icons8.com/ios/50/000000/temperature.png" alt="temp" /></div>
                 </div>
             </div>
         </div>
