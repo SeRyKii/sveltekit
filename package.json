@@ -24,7 +24,12 @@
   "type": "module",
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
+    "autoprefixer": "^10.4.10",
     "cookie": "^0.4.1",
+    "postcss": "^8.4.16",
+    "svelte-local-storage-store": "^0.3.1",
+    "svelte-preprocess": "^4.10.7",
+    "tailwindcss": "^3.1.8",
     "web-vitals": "^2.1.4"
   }
 }

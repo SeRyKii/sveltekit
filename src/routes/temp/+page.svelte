@@ -33,89 +33,33 @@
     }
 </script>
 
-<body>
-    <div class="inner">
+<div class="flex flex-col items-center">
+    <div class="bg-white m-5 rounded-sm shadow-2xl flex flex-col items-center h-fit w-1/4 p-5">
         <!-- input for temperature -->
-        <input type="number" bind:value={tempInput}>
+        <input class="w-full p-4 text-xl bg-slate-100" type="number" bind:value={tempInput}>
         <!-- select with each temperature scale -->
-        <select bind:value={tempInputType}>
+        <select class="w-full p-4 my-1 text-xl" bind:value={tempInputType}>
             <option value="c">Celsius</option>
             <option value="f">Fahrenheit</option>
             <option value="k">Kelvin</option>
         </select>
-        <span>to</span>
+        <span class="text-lg">to</span>
         <!-- select with each temperature to  tempOutputType-->
-        <select bind:value={tempOutputType}>
+        <select class="w-full p-4 my-1 text-xl" bind:value={tempOutputType}>
             <option value="c">Celsius</option>
             <option value="f">Fahrenheit</option>
             <option value="k">Kelvin</option>
         </select>
         <!-- output for temperature -->
         {#if tempOutputType == "c"}
-            <p>{tempOutput}°C</p>
+            <p class="text-4xl">{tempOutput}°C</p>
         {:else if tempOutputType == "f"}
-            <p>{tempOutput}°F</p>
+            <p class="text-4xl">{tempOutput}°F</p>
         {:else if tempOutputType == "k"}
-            <span>{tempOutput}K</span>
+            <p class="text-4xl">{tempOutput}K</p>
         {/if}
 
 
-        <button on:click={calculate}>Calculate!</button>
+        <button class="w-full bg-green-400 p-2 text-2xl hover:bg-green-600" on:click={calculate}>Calculate!</button>
     </div>
-</body>
-
-<style>
-    input {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        text-align: center;
-    }
-    select
-    {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        text-align: center;
-    }
-    p {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        text-align: center;
-    }
-    button {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        text-align: center;
-    }
-
-    span {
-        font-size: 20px;
-        /* center it */
-        display: block;
-        text-align: center;
-
-    }
-    body {
-        background: linear-gradient(to right,#17ddef, darkblue);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
-
-    .inner {
-        background-color: #fff;
-        /* shadow */
-        box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.50);
-        /* border radius */
-        border-radius: 10px;
-        /* padding */
-        padding: 20px;
-
-        max-width: 50vw;
-        max-height: 50vh;
-
-    }
-</style>
+</div>
