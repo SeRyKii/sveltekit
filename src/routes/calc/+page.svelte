@@ -1,108 +1,42 @@
 <!-- Create a calculator site -->
 <script>
-    import { onMount } from 'svelte';
+// @ts-nocheck
 
-    onMount(async () => {
-
-        let input = document.getElementById('input') || {value: ""};
-        // @ts-ignore
-        input.value = window.localStorage.getItem('calc') || "";
-        // @ts-ignore
-        for (let i = 0; i < document.getElementsByTagName('button').length; i++) {
-            document.getElementsByTagName('button')[i].addEventListener("click", () => {
-                console.log("test")
-                if (document.getElementsByTagName('button')[i].textContent === "=") {
-                    // @ts-ignore
-                    input.value = eval(input.value)
-                    // @ts-ignore
-                    if (input.value === "undefined") {
-                        // @ts-ignore
-                        input.value = ""
-                    }
-                } else if (document.getElementsByTagName('button')[i].textContent === "C") {
-                    // @ts-ignore
-                    input.value = ""
-                }else {
-                    // @ts-ignore
-                    input.value = input.value + document.getElementsByTagName('button')[i].textContent
-                }
-                // @ts-ignore
-                window.localStorage.setItem("calc", input.value)
-            })
-        }   
+    import {evalStringState} from './_store';
+    let evalString = "";
+    // @ts-ignore
+    evalStringState.subscribe(value => {
+        evalString = value;
     });
+    function calc() {
+        evalString = eval(evalString)
+        evalStringState.set(evalString);
+    }
 </script>
 
-<body>
-    <div class="inner">
-        <input id="input" type="text" readonly>
-        <div class="buttons">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>0</button>
-            <button>.</button>
-            <button>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
-            <button>=</button>
-            <button>C</button>
-            <button>(</button>
-            <button>)</button>
+<div class="flex flex-col items-center">
+    <div class="w-1/4 bg-white m-5 rounded-sm shadow-2xl p-5 flex flex-col items-center">
+        <input class="text-right w-80 bg-slate-200 p-4 font-bold text-xl" type="text" readonly bind:value={evalString}>
+        <div class="grid grid-cols-4">
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "1")}}>1</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "2")}}>2</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "3")}}>3</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "4")}}>4</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "5")}}>5</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "6")}}>6</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "7")}}>7</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "8")}}>8</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "9")}}>9</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "0")}}>0</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += ".")}}>.</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "+")}}>+</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "-")}}>-</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "*")}}>*</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "/")}}>/</button>
+            <button class="calcBtn" on:click={calc}>=</button>
+            <button class="calcBtn" on:click={() => {evalStringState.set("")}}>C</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += "(")}}>(</button>
+            <button class="calcBtn" on:click={() => {evalStringState.update(v => v += ")")}}>)</button>
         </div>
     </div>
-</body>
-
-<style>
-    body {
-        background: linear-gradient(to right,#17ddef, darkblue);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
-
-    .inner {
-        background-color: #fff;
-        /* shadow */
-        box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.50);
-        /* border radius */
-        border-radius: 10px;
-        /* padding */
-        padding: 20px;
-
-        max-width: 50vw;
-        height: fit-content;
-
-        overflow: hidden;
-    }
-
-    input {
-        width: 100%;
-        height: 50px;
-        font-size: 2rem;
-        text-align: right;
-        border: none;
-        outline: none;
-    }
-
-    .buttons {
-        margin-top: 1rem;
-        /* grid */
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 5px;
-    }
-
-    button {
-        padding: 1.5rem 1rem;
-        /* border */
-        border: 1px solid #ccc;
-    }
-</style>
+</div>

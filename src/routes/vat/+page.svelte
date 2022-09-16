@@ -1,30 +1,20 @@
 <script>
+// @ts-nocheck
+
     import { onMount } from "svelte";
+    let input = 0
+    let vat;
+    let result = 0
 
-
-    onMount(() => {
-        let input = document.getElementById("price")
-        let vat = document.getElementById("select")
-        let result = document.getElementById("result")
-
-        // @ts-ignore
-        document.getElementById("calculate").addEventListener("click", () => {
-            // @ts-ignore
-            if (vat.value === "0") {
-                // @ts-ignore
-                result.value = input.value
-            } else {
-                // @ts-ignore
-                result.value = input.value * (1 - (vat.value / 100))
-            }
-        })
-    })
+    function calc() {
+        result = input * (1 + vat / 100)
+    }
 </script>
 
-<body>
-    <div class="inner">
+<div class="flex flex-col items-center">
+    <div class="bg-white m-5 rounded-sm shadow-2xl flex flex-col items-center w-1/4 p-5">
         <!-- select field with each country and their vat -->
-        <select id="select">
+        <select class=" w-full p-2" bind:value={vat}>
             <option value="0">Wybierz kraj</option>
             <option value="0.23">Polska</option>
             <option value="0.19">Niemcy</option>
@@ -58,51 +48,10 @@
             <option value="0.24">Węgry</option>
         </select>
         <!-- input field for price -->
-        <input id="price" type="number" placeholder="Cena">
+        <input class="w-full text-2xl bg-slate-100 my-2" type="number" placeholder="Cena" bind:value={input}>
         <!-- button to calculate -->
-        <button id="calculate">Oblicz</button>
+        <button on:click={calc} class="w-full bg-green-400 p-2 text-4xl hover:bg-green-600">Oblicz</button>
         <!-- output field for result -->
-        <input id="result" type="number" readonly>
+        <input class="w-full text-2xl bg-slate-100 my-2" type="number" readonly bind:value={result}>
     </div>
-</body>
-
-<style>
-    select {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-    input {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-    button {
-        width: 100%;
-        height: 50px;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-    body {
-        background: linear-gradient(to right,#17ddef, darkblue);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
-
-    .inner {
-        background-color: #fff;
-        /* shadow */
-        box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.50);
-        /* border radius */
-        border-radius: 10px;
-        /* padding */
-        padding: 20px;
-
-        max-width: 50vw;
-        max-height: 50vh;
-
-    }
-</style>
+</div>
