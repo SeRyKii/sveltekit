@@ -8,9 +8,13 @@ body {
 }
 
 .navbut {
-  @apply inline-block hover:bg-slate-200 mx-1 w-40 h-10 grid place-items-center
+  @apply inline-block hover:bg-slate-200 mx-1 w-40 h-10 grid place-items-center;
 }
 
 .calcBtn {
-  @apply hover:bg-slate-200 w-20 h-16 grid place-items-center
+  @apply hover:bg-slate-200 w-20 h-16 grid place-items-center;
+}
+
+* {
+  outline: none;
 }
