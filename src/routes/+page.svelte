@@ -1,7 +1,72 @@
 <script lang="ts">
+  // config
+  const config = {
+    calc: {
+      name: 'Kalkulator',
+      description: 'Normalny kalkulator'
+    },
+    cow: {
+      name: 'Rozdzielacz krówek',
+      description: 'Rozdzielanie krówek pomiedzy osobami'
+    },
+    electricity: {
+      name: 'Kalkulator elektryczności',
+      description: 'Kalkulator do obliczania poboru elektryczności'
+    },
+    emoji: {
+      name: 'Emoji',
+      description: 'Konwertowanie tekstu na emoji'
+    },
+    fuel: {
+      name: 'Kalkulator paliwa',
+      description: 'Kalkulator do obliczania kosztów paliwa'
+    },
+    heartcards: {
+      name: 'Serduszkowe kartki',
+      description: 'Generator kartek serduszkowych'
+    },
+    loops: {
+      name: 'Pętle',
+      description: 'Tworzenie sekwencji liczb pętlą for'
+    },
+    password: {
+      name: 'Test silnego hasła',
+      description: 'Test do sprawdzenia czy hasło jest silne'
+    },
+    temp: {
+      name: 'Konwerter temperatur',
+      description: 'Konwertuje temperaturę z jednostki na drugą'
+    },
+    typography: {
+      name: 'Typografia',
+      description: 'Sprawdzanie jak wygląda czcionka'
+    },
+    vat: {
+      name: 'Kalkulator VAT',
+      description: 'Oblicz VAT'
+    },
+    water: {
+      name: 'Kalkulator wody',
+      description: 'Oblicz w jakim stanie będzie woda'
+    },
+    zamowienia: {
+      name: 'Zamówienia',
+      description: 'Zamów oprogramowanie'
+    }
+  };
+  // end config
+
   import { goto } from '$app/navigation';
   import { onDestroy, onMount } from 'svelte';
+  let data: { name: string; path: string; json: any }[] = [];
 
+  Object.keys(config).forEach((key) => {
+    data.push({
+      name: config[key as keyof typeof config].name,
+      path: key,
+      json: config[key as keyof typeof config]
+    });
+  });
   // 14 different Pastel colors
   let colorPool = [
     '#F9C5D3',
@@ -19,7 +84,6 @@
     '#F9D3D6',
     '#F9D3F9'
   ];
-  export let data: { name: string; path: string; json: any }[] = [];
 
   let mode = 0;
 
@@ -27,7 +91,7 @@
     let cards = document.querySelectorAll('.tile');
     cards.forEach((card: HTMLDivElement | any) => {
       // Make random between -75 and 75 and make it more random
-      let random = Math.floor(Math.random() * 200) - 100;
+      let random = Math.floor(Math.random() * 200);
       card.style.setProperty('--position', `${random}px`);
     });
   }
@@ -92,6 +156,9 @@
           const hoverCard = document.createElement('div');
           const hoverCardh1 = document.createElement('h1');
           const hoverCardp = document.createElement('p');
+          const hoverTextDiv = document.createElement('div');
+          const icon = document.createElement('i');
+          icon.classList.add('');
           hoverCard.classList.add(
             'bg-black',
             'p-2',
@@ -99,14 +166,17 @@
             'shadow-2xl',
             'w-fit',
             'absolute',
-            'z-10'
+            'z-10',
+            'flex',
+            'flex-row'
           );
           hoverCardh1.classList.add('text-white', 'text-2xl');
           hoverCardp.classList.add('text-white', 'text-xl');
           hoverCardh1.innerText = route.name;
           hoverCardp.innerText = route.json.description;
-          hoverCard.appendChild(hoverCardh1);
-          hoverCard.appendChild(hoverCardp);
+          hoverTextDiv.appendChild(hoverCardh1);
+          hoverTextDiv.appendChild(hoverCardp);
+          hoverCard.appendChild(hoverTextDiv);
           hoverCard.style.display = 'absolue';
           hoverCard.id = 'hover-card';
           hoverCard.style.top = e.y + 'px';
@@ -145,17 +215,20 @@
   .tile-mode-0 {
     height: 500px;
     width: 100px;
+    top: 0;
   }
 
   .tile-mode-1 {
     height: 500px;
     width: 100px;
     border-radius: 50%;
+    top: 0;
   }
 
   .tile-mode-2 {
     height: 200px;
     width: 120px;
+    top: var(--position, 0px);
   }
 
   .tile-mode-3 {
@@ -163,6 +236,7 @@
     width: 120px;
     border-radius: var(--top-left, 0px) var(--top-right, 0px) var(--bottom-right, 0px)
       var(--bottom-left, 0px);
+    top: var(--position, 0px);
   }
 
   .tile-mode-4 {
@@ -174,7 +248,6 @@
 
   .tile {
     position: relative;
-    top: var(--position, 0px);
   }
 
   .tile:hover {

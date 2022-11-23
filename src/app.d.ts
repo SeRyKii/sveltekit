@@ -12,3 +12,10 @@ declare namespace App {
 
   // interface PublicEnv {}
 }
+declare module '@fortawesome/pro-solid-svg-icons/index.es' {
+  export * from '@fortawesome/pro-solid-svg-icons';
+}
+
+declare module '@fortawesome/pro-regular-svg-icons/index.es' {
+  export * from '@fortawesome/pro-regular-svg-icons';
+}
