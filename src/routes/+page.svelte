@@ -206,6 +206,7 @@
           hoverTextDiv.appendChild(hoverCardp);
           hoverCard.appendChild(hoverTextDiv);
           hoverCard.style.display = 'absolue';
+          hoverCard.style.borderRadius = '5px';
           hoverCard.id = 'hover-card';
           hoverCard.style.top = e.y + 'px';
           hoverCard.style.left = e.x + 'px';
