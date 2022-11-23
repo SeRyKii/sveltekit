@@ -48,7 +48,7 @@
   }
 
   function nextMode() {
-    mode = (mode + 1) % 5;
+    mode = (mode + 1) % 4;
   }
 
   let interval: ReturnType<typeof setInterval>;
@@ -83,6 +83,8 @@
         class={`tile tile-mode-${mode} flex flex-col items-center justify-center`}
         style={`background-color: ${colorPool[i]};`}
         on:click={() => {
+          document.getElementById('hover-card')?.remove();
+          document.body.onmousemove = null;
           goto('/' + route.path);
         }}
         on:mouseenter={(e) => {
@@ -107,7 +109,6 @@
           hoverCard.appendChild(hoverCardp);
           hoverCard.style.display = 'absolue';
           hoverCard.id = 'hover-card';
-          console.log(e.y, e.x);
           hoverCard.style.top = e.y + 'px';
           hoverCard.style.left = e.x + 'px';
           document.body.appendChild(hoverCard);
