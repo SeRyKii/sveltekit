@@ -3,55 +3,73 @@
   const config = {
     calc: {
       name: 'Kalkulator',
-      description: 'Normalny kalkulator'
+      description: 'Normalny kalkulator',
+      icon: 'fa-calculator'
     },
     cow: {
       name: 'Rozdzielacz krówek',
-      description: 'Rozdzielanie krówek pomiedzy osobami'
+      description: 'Rozdzielanie krówek pomiedzy osobami',
+      icon: 'fa-cow'
     },
     electricity: {
       name: 'Kalkulator elektryczności',
-      description: 'Kalkulator do obliczania poboru elektryczności'
+      description: 'Kalkulator do obliczania poboru elektryczności',
+      icon: 'fa-bolt'
     },
     emoji: {
       name: 'Emoji',
-      description: 'Konwertowanie tekstu na emoji'
+      description: 'Konwertowanie tekstu na emoji',
+      icon: 'fa-icons'
     },
     fuel: {
       name: 'Kalkulator paliwa',
-      description: 'Kalkulator do obliczania kosztów paliwa'
+      description: 'Kalkulator do obliczania kosztów paliwa',
+      icon: 'fa-gas-pump'
     },
     heartcards: {
       name: 'Serduszkowe kartki',
-      description: 'Generator kartek serduszkowych'
+      description: 'Generator kartek serduszkowych',
+      icon: 'fa-heart'
     },
     loops: {
       name: 'Pętle',
-      description: 'Tworzenie sekwencji liczb pętlą for'
+      description: 'Tworzenie sekwencji liczb pętlą for',
+      icon: 'fa-rotate-left'
+    },
+    names: {
+      name: 'Generator nazw',
+      description: 'Narzędzie do generowania nazw',
+      icon: 'fa-signature'
     },
     password: {
       name: 'Test silnego hasła',
-      description: 'Test do sprawdzenia czy hasło jest silne'
+      description: 'Test do sprawdzenia czy hasło jest silne',
+      icon: 'fa-key'
     },
     temp: {
       name: 'Konwerter temperatur',
-      description: 'Konwertuje temperaturę z jednostki na drugą'
+      description: 'Konwertuje temperaturę z jednostki na drugą',
+      icon: 'fa-thermometer'
     },
     typography: {
       name: 'Typografia',
-      description: 'Sprawdzanie jak wygląda czcionka'
+      description: 'Sprawdzanie jak wygląda czcionka',
+      icon: 'fa-font'
     },
     vat: {
       name: 'Kalkulator VAT',
-      description: 'Oblicz VAT'
+      description: 'Oblicz VAT',
+      icon: 'fa-percent'
     },
     water: {
       name: 'Kalkulator wody',
-      description: 'Oblicz w jakim stanie będzie woda'
+      description: 'Oblicz w jakim stanie będzie woda',
+      icon: 'fa-droplet'
     },
     zamowienia: {
       name: 'Zamówienia',
-      description: 'Zamów oprogramowanie'
+      description: 'Zamów oprogramowanie',
+      icon: 'fa-cart-shopping'
     }
   };
   // end config
@@ -118,6 +136,10 @@
   let interval: ReturnType<typeof setInterval>;
 
   onMount(() => {
+    const script = document.createElement('script');
+    script.src = 'https://kit.fontawesome.com/d617030d1d.js';
+    script.crossOrigin = 'anonymous';
+    document.body.appendChild(script);
     interval = setInterval(() => {
       nextMode();
       if (mode == 0) {
@@ -158,7 +180,11 @@
           const hoverCardp = document.createElement('p');
           const hoverTextDiv = document.createElement('div');
           const icon = document.createElement('i');
-          icon.classList.add('');
+          icon.classList.add('fa-solid', route.json.icon);
+          icon.style.color = '#ffffff';
+          icon.style.fontSize = '48px';
+          icon.style.marginRight = '1rem';
+          icon.style.marginLeft = '0.5rem';
           hoverCard.classList.add(
             'bg-black',
             'p-2',
@@ -168,12 +194,14 @@
             'absolute',
             'z-10',
             'flex',
-            'flex-row'
+            'flex-row',
+            'items-center'
           );
           hoverCardh1.classList.add('text-white', 'text-2xl');
           hoverCardp.classList.add('text-white', 'text-xl');
           hoverCardh1.innerText = route.name;
           hoverCardp.innerText = route.json.description;
+          hoverCard.appendChild(icon);
           hoverTextDiv.appendChild(hoverCardh1);
           hoverTextDiv.appendChild(hoverCardp);
           hoverCard.appendChild(hoverTextDiv);
