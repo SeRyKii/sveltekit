@@ -6,7 +6,8 @@ export function load({ params }) {
   const currentWorkingDirectory = process.cwd();
 
   // Read all files in current directory
-  const files = fs.readdirSync("./src/routes");
+  const files = fs.readdirSync("./");
+  console.log(files)
 
   // Filter out all files that are not directories
   const directories = files.filter(file => fs.statSync(currentWorkingDirectory + "/src/routes/" + file).isDirectory());
